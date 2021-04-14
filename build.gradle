@@ -1,44 +1,67 @@
 plugins {
-    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.31'
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+group = 'org.example'
+version = '1.0-SNAPSHOT'
 
 sourceSets {
     worker {}
     main {
         compileClasspath += sourceSets.worker.output
         runtimeClasspath += sourceSets.worker.output
-
-        compileClasspath += configurations.workerCompileClasspath
-        runtimeClasspath += configurations.workerRuntimeClasspath
     }
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
+    implementation 'org.parspice:parspice.implementation:1.0-SNAPSHOT'
     workerImplementation 'org.parspice:parspice.implementation:1.0-SNAPSHOT'
 
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+}
+
+task workerJar(type: Jar, dependsOn: classes) {
+    manifest {
+        attributes 'Implementation-Title': 'ParSPICE Template Worker Jar'
+    }
+    archiveBaseName.set("worker")
+    archiveVersion.set("")
+    from {
+        sourceSets.worker.output
+    }
+    from {
+        configurations.workerRuntimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy DuplicatesStrategy.INCLUDE
 }
 
 test {
     useJUnitPlatform()
 }
 
-jar {
-    from {
-        configurations.workerCompileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-    from {
-        sourceSets.worker.output
-    }
-    archiveBaseName.set("worker")
-    archiveVersion.set("")
+compileKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+compileWorkerKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+task run(type: JavaExec, dependsOn: workerJar) {
+    description = "Run the main process"
+    classpath += sourceSets.main.output
+    classpath += sourceSets.worker.output
+    classpath += configurations.runtimeClasspath
+    main = "MainKt"
 }
