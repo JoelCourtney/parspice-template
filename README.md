@@ -1,6 +1,3 @@
-# ParSPICE Java Template
-A basic outline for a parspice project in Java.
+# ParSPICE Templates
 
-The relevant code can be found in `src/main/java/Main.java`, `src/worker/java/MyWorker.java`, and `build.gradle`.
-
-All other files where generated as-is from a new Gradle Java project in IntelliJ.
+Basic template gradle projects are provided for Java and Kotlin. They each have their own branch.
