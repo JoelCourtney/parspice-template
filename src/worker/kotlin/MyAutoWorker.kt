@@ -1,4 +1,3 @@
-import parspice.sender.DoubleArraySender
 import parspice.worker.AutoWorker
 
 class MyAutoWorker: AutoWorker() {
