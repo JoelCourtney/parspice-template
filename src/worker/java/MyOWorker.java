@@ -1,9 +1,9 @@
 import parspice.sender.DoubleArraySender;
 import parspice.worker.OWorker;
 
-public class MyWorker extends OWorker<double[]> {
+public class MyOWorker extends OWorker<double[]> {
 
-    public MyWorker() {
+    public MyOWorker() {
         super(new DoubleArraySender(3));
     }
 
