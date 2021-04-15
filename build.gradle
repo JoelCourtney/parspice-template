@@ -6,10 +6,9 @@ group = 'org.example'
 version = '1.0-SNAPSHOT'
 
 sourceSets {
-    worker {}
+    worker
     main {
         compileClasspath += sourceSets.worker.output
-        runtimeClasspath += sourceSets.worker.output
     }
 }
 
@@ -19,8 +18,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.parspice:parspice.implementation:1.0-SNAPSHOT'
-    workerImplementation 'org.parspice:parspice.implementation:1.0-SNAPSHOT'
+    implementation 'parspice:parspice:1.0'
+    workerImplementation 'parspice:parspice:1.0'
 
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
