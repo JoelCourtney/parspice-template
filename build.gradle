@@ -18,8 +18,15 @@ repositories {
 }
 
 dependencies {
+    // ParSPICE needs to be included for both source sets.
     implementation 'parspice:parspice:1.0'
     workerImplementation 'parspice:parspice:1.0'
+
+    /*
+    Add more dependencies for the worker with:
+
+    workerImplementation 'your:dependency:1.0'
+     */
 
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'

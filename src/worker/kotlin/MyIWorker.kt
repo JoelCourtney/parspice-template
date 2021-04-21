@@ -1,8 +1,8 @@
-import parspice.sender.DoubleArraySender
+import parspice.sender.IntSender
 import parspice.worker.IWorker
 
-class MyIWorker: IWorker<DoubleArray>(DoubleArraySender(3)) {
+class MyIWorker: IWorker<Int>(IntSender()) {
     override fun setup() {}
 
-    override fun task(input: DoubleArray) {}
+    override fun task(input: Int) {}
 }
