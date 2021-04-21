@@ -9,7 +9,7 @@ public class MyOWorker extends OWorker<double[]> {
 
     @Override
     public void setup() throws Exception {
-
+        // This is optional
     }
 
     @Override

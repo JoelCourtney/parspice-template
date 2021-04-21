@@ -4,7 +4,7 @@ public class MyAutoWorker extends AutoWorker {
 
     @Override
     public void setup() throws Exception {
-
+        // This is optional
     }
 
     @Override
